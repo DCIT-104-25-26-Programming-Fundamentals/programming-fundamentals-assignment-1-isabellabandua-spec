@@ -68,35 +68,45 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
-def add(number1, number2):
-    return number1 + number2
+# =============================================================================
+# PROGRAMMING FUNDAMENTALS — Assignment 9
+# Console-Based Simple Calculator
+# =============================================================================
+
+# Functions for each operation
+def add(a, b):
+    return a + b
 
 
-def subtract(number1, number2):
-    return number1 - number2
+def subtract(a, b):
+    return a - b
 
 
-def multiply(number1, number2):
-    return number1 * number2
+def multiply(a, b):
+    return a * b
 
 
-def divide(number1, number2):
-    if number2 == 0:
+def divide(a, b):
+    if b == 0:
         return None
-
-    return round(number1 / number2, 2)
-
-
-def modulus(number1, number2):
-    return number1 % number2
+    return round(a / b, 2)
 
 
-def exponent(number1, number2):
-    return number1 ** number2
+def modulus(a, b):
+    if b == 0:
+        return None
+    return a % b
 
 
-def show_menu():
-    print("     SIMPLE CALCULATOR      ")
+def exponent(a, b):
+    return a ** b
+
+
+# Main program loop
+while True:
+    print("\n============================")
+    print("     SIMPLE CALCULATOR")
+    print("============================")
     print("1. Addition")
     print("2. Subtraction")
     print("3. Multiplication")
@@ -105,51 +115,51 @@ def show_menu():
     print("6. Exponentiation")
     print("7. Quit")
 
+    choice = input("Select an operation (1-7): ")
 
-def main():
-    while True:
-        show_menu()
+    if choice == "7":
+        print("Goodbye!")
+        break
 
-        choice = input("Select an operation (1-7): ")
+    if choice not in ["1", "2", "3", "4", "5", "6"]:
+        print("Error: Invalid menu choice.")
+        continue
 
-        if choice == "7":
-            print("Goodbye!")
-            break
+    # Get user input
+    try:
+        num1 = float(input("Enter first number : "))
+        num2 = float(input("Enter second number: "))
+    except ValueError:
+        print("Error: Please enter valid numbers.")
+        continue
 
-        if choice >= "1" and choice <= "6":
-            number1 = float(input("Enter first number: "))
-            number2 = float(input("Enter second number: "))
+    # Perform selected operation
+    if choice == "1":
+        result = add(num1, num2)
+        print(f"Result: {num1} + {num2} = {result}")
 
-            if choice == "1":
-                result = add(number1, number2)
-                print("Result:", result)
+    elif choice == "2":
+        result = subtract(num1, num2)
+        print(f"Result: {num1} - {num2} = {result}")
 
-            elif choice == "2":
-                result = subtract(number1, number2)
-                print("Result:", result)
+    elif choice == "3":
+        result = multiply(num1, num2)
+        print(f"Result: {num1} * {num2} = {result}")
 
-            elif choice == "3":
-                result = multiply(number1, number2)
-                print("Result:", result)
-
-            elif choice == "4":
-                result = divide(number1, number2)
-
-                if result is None:
-                    print("Error: Cannot divide by zero.")
-                else:
-                    print("Result:", result)
-
-            elif choice == "5":
-                result = modulus(number1, number2)
-                print("Result:", result)
-
-            elif choice == "6":
-                result = exponent(number1, number2)
-                print("Result:", result)
-
+    elif choice == "4":
+        result = divide(num1, num2)
+        if result is None:
+            print("Error: Cannot divide by zero.")
         else:
-            print("Error: Invalid choice.")
+            print(f"Result: {num1} / {num2} = {result:.2f}")
 
+    elif choice == "5":
+        result = modulus(num1, num2)
+        if result is None:
+            print("Error: Cannot perform modulus by zero.")
+        else:
+            print(f"Result: {num1} % {num2} = {result}")
 
-main()
+    elif choice == "6":
+        result = exponent(num1, num2)
+        print(f"Result: {num1} ** {num2} = {result}")
